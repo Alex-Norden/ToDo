@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+	{% if messages %}
+
+		{% for message in messages %}
+
+			<div class="alert alert-info alert-dismissable" role="alert">
+				<button class="close btn btn-info" data-dismiss="alert">
+					<i> X </i>
+				</button>
+
+				{{ message }}
+
+			</div>
+
+		{% endfor %}
+
+	{% endif %}
+
+{% if all_items %}
+		<div class="container">
+			{% for things in all_items %}
+				{% if things.completed %}
+					<div class="row rounded my-2 p-3 table-secondary">
+						<div class="col-5 striker">
+							<a href="{% url 'edit' things.id %}" class="text-success"> {{ things.item }} </a>
+						</div>
+						<div class="col"><a href="{% url 'is_not_done' things.id %}" class="btn btn-success"> Выполнено </a></div>
+						<div class="col"><a href="{% url 'delete' things.id %}" class="btn btn-danger">Удалить</a></div>
+					</div>
+				{% else %}
+					<div class="row rounded my-2 p-3">
+						<div class="col-5">
+							<a href="{% url 'edit' things.id %}" class="text-primary"> {{ things.item }} </a>
+						</div>
+						<div class="col"><a href="{% url 'is_done' things.id %}" class="btn btn-outline-secondary"> Не выполнено </a></div>
+						<div class="col"><a href="{% url 'delete' things.id %}" class="btn btn-danger">Удалить</a></div>
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	<!-- <table class="table table-bordered"> -->
+		
+	<!-- </table> -->
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	{% if item %}
+		<form class="form-inline my-2" method="POST">
+			{% csrf_token %}
+			<input class="form-control mr-2" placeholder="Добавить задачу" value="{{ item.item }}" name="item">
+
+			<input type="hidden" value="{{ item.completed }}" name="completed">
+
+			<button class="btn btn-outline-secondary my-2" type="submit">Изменить</button>
+		</form>
+	{% endif %}
+
+{% endblock %}
